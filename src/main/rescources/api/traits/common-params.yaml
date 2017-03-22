@@ -1,0 +1,10 @@
+queryParameters:
+  requestId:
+    type: string
+    description: 请求id，建议使用时间戳+随机数
+    example: 1234567890123
+    required: true
+  token:
+    type: string
+    description: 权限校验token
+    required: true

@@ -1,0 +1,91 @@
+#%RAML 0.8
+title: M-SmartPay 权限验证模块
+version: v1
+baseUri: http://api.msmart.midea.com/{version}/api
+traits:
+  - common-params: !include traits/common-params.yaml
+/auth-login:
+  post:
+    description: 登陆接口
+    is: [common-params]
+    queryParameters:
+      username:
+        type: string
+        description: 用户登陆账号
+        required: true
+      password:
+        type: string
+        description: 用户登陆密码
+        required: true
+      redirectUrl:
+        type: string
+        description: 验证登陆后需要返回的页面
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "0",
+                "info" : "登陆成功",
+                "data" : {
+                    "token" : "xxxxxx",
+                    "redirectUrl:" "home.html",
+                    "user" : {
+                        "loginId" : "msmart",
+                        "name" : "name"
+                    }
+                  }
+              }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "1",
+                "info" : "登陆失败。"
+              }
+/auth-logout:
+  post:
+    description: 登陆接口
+    is: [common-params]
+    queryParameters:
+      username:
+        type: string
+        description: 用户登陆账号
+        required: true
+      password:
+        type: string
+        description: 用户登陆密码
+        required: true
+      redirectUrl:
+        type: string
+        description: 验证登陆后需要返回的页面
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "0",
+                "info" : "登陆成功",
+                "data" : {
+                    "token" : "xxxxxx",
+                    "redirectUrl:" "home.html",
+                    "user" : {
+                        "loginId" : "msmart",
+                        "name" : "name"
+                    }
+                  }
+              }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "1",
+                "info" : "登陆失败。"
+              }
+  

@@ -1,0 +1,133 @@
+#%RAML 0.8
+title: M-SmartPay 权限验证模块
+version: v1
+baseUri: http://api.msmart.midea.com/{version}/api
+traits:
+  - common-params: !include traits/common-params.yaml
+/gettoken:
+  post:
+    description: 鉴权接口
+    is: [common-params]
+    queryParameters:
+      appId:
+        type: string
+        description: 第三方应用ID
+        required: true
+      appKey:
+        type: string
+        description: 第三方应用秘钥
+        required: true
+      clientType:
+        type: string
+        description: 客户端类型
+        required: false
+      timeStamp:
+        type: string
+        description: 时间戳
+        required: false
+      language:
+        type: string
+        description: 客户端语言
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "0",
+                "info" : "鉴权成功",
+                "data" : {
+                    "token" : "xxxxxx"
+                  }
+              }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "1",
+                "info" : "鉴权失败。"
+              }
+/binddevice:
+  post:
+    description: 设备绑定接口
+    is: [common-params]
+    queryParameters:
+      deviceSn:
+        type: string
+        description: 设备SN
+        required: true
+      longitude:
+        type: string
+        description: 设备经度
+        required: true
+      latitude:
+        type: string
+        description: 设备纬度
+        required: true
+      storeNo:
+        type: string
+        description: 场地编号
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "0",
+                "info" : "绑定成功",
+                "data" : {
+                  "deviceSn" : "1018",
+                  "waterNo:" "20161223323432"
+                }
+              }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "1",
+                "info" : "绑定失败。"
+              }
+  
+/unbinddevice:
+  post:
+    description: 设备绑定接口
+    is: [common-params]
+    queryParameters:
+      deviceSn:
+        type: string
+        description: 设备SN
+        required: true
+      waterNo:
+        type: string
+        description: 绑定设备流水号
+        required: true
+      waterNoSource:
+        type: string
+        description: 绑定业务号
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "0",
+                "info" : "解绑成功",
+                "data" : {
+                  "deviceSn" : "1018",
+                  "waterNo:" "20161223323432"
+                }
+              }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "code" : "1",
+                "info" : "解绑失败。"
+              }
+  
